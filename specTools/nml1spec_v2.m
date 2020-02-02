@@ -1,19 +1,24 @@
-function [orgnSpec,nmldSpec] = nml1spec(nameOrSpec,measureTime,energyStep,plotOrNot)
+function [orgnSpec,nmldSpec] = ...
+    nml1spec_v2(nameOrSpec,measureTime,energyStep,plotOrNot, ...
+    PeakE1,PeakRange1,PeakE2,PeakRange2)
 % 标准化出束能谱：以511keV和2223keV刻度能谱，统一横轴
 % nameOrSpec: 单列数值矩阵能谱，或spe格式能谱文件名（单位：计数/道）
 % measureTime: 测量时长（单位：s）
 % originalSpec: 若nameOrSpec为文件名，则为获取的单列能谱，若为矩阵则为横向和
 % normalizedSpec: 双列能谱，第一列MeV能量，第二列计数率
 % REFERENCE: C-12 4.945;
+% [orgnSpec,nmldSpec]=nml1spec_v2(nameOrSpec,600,0.01,1,0.478,[65,79],2.223,[300,359])
+
 maxEnergyRange = 12; % MeV
 energyAxis = (energyStep:energyStep:maxEnergyRange)';
-PEAKENERGY_1 = 4.945;
-PEAKENERGY_2 = 2.223;
-PEAKRANGE_1 = [598,647];
-PEAKRANGE_2 = [254,307];
-
+if nargin < 5
+    PeakE1 = 0.478;
+    PeakE2 = 2.223;
+    PeakRange1 = [65,79];
+    PeakRange2 = [330,359];
+end
 %% 导入数据
-if ischar(nameOrSpec) % 是矩阵
+if ischar(nameOrSpec) % 是文件
     specStartStr = '$DATA:';
     fid = fopen(nameOrSpec,'r');
     for i =1:2100
@@ -32,16 +37,16 @@ end
 
 %% 作原始数据图
 if plotOrNot
-figure;
-semilogy(spec,'o-');xlabel('Channel');ylabel('Count rate(count/ch)');grid on;
+    figure;
+    semilogy(spec,'o-');xlabel('Channel');ylabel('Count rate(count/ch)');grid on;
 end
 
 %% 寻峰(使用计数率图)
-[~,~,~,~,~,peak_511,~] = fitPeak((PEAKRANGE_1(1):PEAKRANGE_1(2))',spec(PEAKRANGE_1(1):PEAKRANGE_1(2))/measureTime,plotOrNot);
-[~,~,~,~,~,peak_H2223,~] = fitPeak((PEAKRANGE_2(1):PEAKRANGE_2(2))',spec(PEAKRANGE_2(1):PEAKRANGE_2(2))/measureTime,plotOrNot);
+[~,~,~,~,~,peak_511,~] = fitPeak((PeakRange1(1):PeakRange1(2))',spec(PeakRange1(1):PeakRange1(2))/measureTime,plotOrNot);
+[~,~,~,~,~,peak_H2223,~] = fitPeak((PeakRange2(1):PeakRange2(2))',spec(PeakRange2(1):PeakRange2(2))/measureTime,plotOrNot);
 
 %% 刻度
-originalEScale = (PEAKENERGY_2-PEAKENERGY_1)*((1:size(spec,1))'-peak_511)/(peak_H2223-peak_511)+PEAKENERGY_1;
+originalEScale = (PeakE2-PeakE1)*((1:size(spec,1))'-peak_511)/(peak_H2223-peak_511)+PeakE1;
 orgnSpec = spec/measureTime; % Unit of spec: cps/ch
 orgnSpec = orgnSpec*(energyAxis(5,1)-energyAxis(4,1))/ ...
     (originalEScale(5,1)-originalEScale(4,1)); % Unit of spec: cps/enrgybin

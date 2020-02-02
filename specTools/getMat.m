@@ -1,5 +1,5 @@
 function [spec,orgnSpecs] = getMat(folderName,timeOf1File)
-% 读取一个文件夹所有的spe能谱
+% 读取并保存为mat一个文件夹所有的spe能谱
 % folderName: 文件夹名称
 % timeOf1File: 每一个文件的测量时长（单位：s）
 % orgnSpecs: 每一列为一个文件的原始能谱

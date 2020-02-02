@@ -9,9 +9,9 @@ f=fittype('(amp/(sigma*sqrt(2*pi)))*exp(-(t-xpeak)^2/(2*sigma^2))+a+slope*t', ..
     'independent','t','coefficients',{'amp','sigma','xpeak','a','slope'});
 options = fitoptions('Method','NonlinearLeastSquares');
 originalPeak = x(find(y==max(y))); originalPeak = originalPeak(1,1);
-options.Lower = [10,2,originalPeak-5,0,-Inf];
-options.Upper = [Inf,Inf,originalPeak+5,Inf,0];
-options.StartPoint = [10,1,originalPeak,1,(y(end)-y(1))/(x(end)-x(1))];
+options.Lower = [3,0,originalPeak-2,0,-Inf];
+options.Upper = [Inf,2,originalPeak+2,Inf,0];
+options.StartPoint = [10,0.5,originalPeak,0.1,(y(end)-y(1))/(x(end)-x(1))];
 cfun = fit(x,y,f,options);
 if plotOrNot
     figure;
