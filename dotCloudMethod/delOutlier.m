@@ -68,13 +68,12 @@ if plotOrNot
         thisNewSeq = thisOldSeq;
         thisNewSeq(unique_delCh) = [];
         figure;
-        h1=histogram(thisOldSeq);
-        hold on;
+        h1=histogram(thisOldSeq);hold on;
         h2=histogram(thisNewSeq);
         h1.Normalization = 'probability';
-        % h1.BinWidth = 10;
         h2.Normalization = 'probability';
-        h2.BinWidth = h1.BinWidth;
+        h1.NumBins = 50;
+        h2.BinEdges = h1.BinEdges;
         title(['Count rate distribution of specSeq of ',ROInames{i}]);
         xlabel('Count rate(cps)')
         % ylabel('Frequency (/',num2str(h1.BinWidth),'cps)');
