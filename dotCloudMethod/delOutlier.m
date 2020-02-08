@@ -1,4 +1,4 @@
-function [newSpecSeq,delCh,delSeg] = delOutlier(specSeq,stableTime,ROI,outlierThresh,plotOrNot)
+function newSpecSeq = delOutlier(specSeq,stableTime,ROI,outlierThresh,plotOrNot)
 % 删除能谱序列的离群点
 % specSeq:标准化的能谱序列，每一列为一标准化能谱
 % stableTime：从第几个能谱开始加速器稳定
@@ -62,20 +62,38 @@ if plotOrNot
             ' Std=',num2str(std(seq(i,stableTime:end),0))]});
         ymin = min(seq(i,:));ymax = max(seq(i,:));
         ylim([max([0,1.5*ymin-0.5*ymax]),1.5*ymax-0.5*ymin]);
+        
+        %% 画计数率分布图
+        thisOldSeq = seq(i,:);
+        thisNewSeq = thisOldSeq;
+        thisNewSeq(unique_delCh) = [];
+        figure;
+        h1=histogram(thisOldSeq);
+        hold on;
+        h2=histogram(thisNewSeq);
+        h1.Normalization = 'probability';
+        % h1.BinWidth = 10;
+        h2.Normalization = 'probability';
+        h2.BinWidth = h1.BinWidth;
+        title(['Count rate distribution of specSeq of ',ROInames{i}]);
+        xlabel('Count rate(cps)')
+        % ylabel('Frequency (/',num2str(h1.BinWidth),'cps)');
+        ylabel(['Probability (/',num2str(h1.BinWidth),'cps)']);
+        legend('all','select');
     end
 end
-
-%% 画计数率分布图
-figure;
-[y,x]=hist(sum(specSeq,1),0:1e2:5e4);
-plot(x,y,'r.-');hold on;
-[y,x]=hist(sum(newSpecSeq,1),0:1e2:5e4);
-plot(x,y,'b.-');
-title('Count rate distribution of specSeq full spectra');
-xlabel('Count rate(cps)')
-ylabel('Frequency (/100cps)');
-legend('all','select');
-specSeq(:,delCh) = [];clearvars specSeq0;
+% 
+% %% 画计数率分布图
+% figure;
+% [y,x]=hist(sum(specSeq,1),0:1e2:5e4);
+% plot(x,y,'r.-');hold on;
+% [y,x]=hist(sum(newSpecSeq,1),0:1e2:5e4);
+% plot(x,y,'b.-');
+% title('Count rate distribution of specSeq full spectra');
+% xlabel('Count rate(cps)')
+% ylabel('Frequency (/100cps)');
+% legend('all','select');
+% specSeq(:,delCh) = [];clearvars specSeq0;
 
 
 end
