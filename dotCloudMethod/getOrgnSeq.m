@@ -1,4 +1,4 @@
-function [spec,orgnSpecs] = getOrgnSeq(folderName,timeOf1File)
+function orgnSpecSeq = getOrgnSeq(folderName,displayOrNot)
 % 读取并保存为mat一个文件夹所有的spe能谱
 % folderName: 文件夹名称
 % timeOf1File: 每一个文件的测量时长（单位：s）
@@ -18,23 +18,19 @@ for i =1:100 % 前100行能找到能谱头
 end
 fclose(fid);
 
-%% 导入原始能谱至orgnSpecs
-orgnSpecs = [];
+%% 储存原始能谱至orgnSpecs
+orgnSpecSeq = [];
+if displayOrNot
+    f = waitbar(0,['Loading from folder ',folderName]);
+end
 for i = 3:size(dir1,1)
     d = importdata([folderName,'\',dir1(i).name],'',specStartRow+1);
     if sum(d.data)~=0
-        orgnSpecs = [orgnSpecs,d.data];
+        orgnSpecSeq = [orgnSpecSeq,d.data];
     end
-    disp(num2str(i));
+    if displayOrNot
+        waitbar(i/size(dir1,1),f,['Loading ',num2str(i), ...
+            '/',num2str(size(dir1,1)),' from folder ',folderName]);
+    end
 end
-spec=sum(orgnSpecs,2)/(size(orgnSpecs,2)*timeOf1File);
-
-
-% save(folderName,'orgnSpecs','spec');
-% 
-% figure;
-% semilogy(spec);
-% hold on;xlabel('Channel');ylabel('Count rate(cps/ch)');
-% title(folderName);
-% disp(['Count rate(count/1 file measure time):',num2str(sum(spec))]);
 end

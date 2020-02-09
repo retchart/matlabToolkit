@@ -6,7 +6,9 @@ if contains(fileOrFolderName,'eV-nml') % 标准化文件
     load([fileOrFolderName,'.mat']);
     specSeq = sgnl;
 else % 文件夹
-    
+    orgnSpecSeq = getOrgnSeq(fileOrFolderName,1);
+    nmlSpecSeq = nmlOrgnSeq(orgnSpecSeq,1);
 end
+
 
 end

@@ -1,4 +1,4 @@
-function newSpecSeq = delOutlier(specSeq,stableTime,ROI,outlierThresh,plotOrNot)
+function newSpecSeq = deleteoutlier(specSeq,stableTime,ROI,outlierThresh,plotOrNot)
 % 删除能谱序列的离群点
 % specSeq:标准化的能谱序列，每一列为一标准化能谱
 % stableTime：从第几个能谱开始加速器稳定
