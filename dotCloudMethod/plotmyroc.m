@@ -1,8 +1,10 @@
-function handle = plotroccurves(roc,detectionTime)
-% plot ROC curves
+function handle = plotmyroc(roc,falseRate,detectionTime)
+% plot ROC curves according to given roc cell. 
+% Matlab built-in function 'plotroc' is also interesting.
 %
 % Inputs:
 % roc: Structure of roc for different measure time
+% falseRate: Area top left side of ROC curve
 % detectionTime: Which detection time are plotted
 %
 % Output:
@@ -15,11 +17,11 @@ lineType = {':','-.','--','-','x-'};
 figure;
 for iTime = detectionTime
     if iLine<=length(lineType)
-        handle = plot(roc{iTime,1}(:,2),roc{iTime,1}(:,1),lineType{iLine},'LineWidth',lineWidth);hold on;
+        handle = plot(roc{iTime,1}(:,1),roc{iTime,1}(:,2),lineType{iLine},'LineWidth',lineWidth);hold on;
     else
-        handle = plot(roc{iTime,1}(:,2),roc{iTime,1}(:,1),'-','LineWidth',lineWidth);hold on;
+        handle = plot(roc{iTime,1}(:,1),roc{iTime,1}(:,2),'-','LineWidth',lineWidth);hold on;
     end
-    legendText{iLine} = [num2str(iTime),' s'];
+    legendText{iLine} = [num2str(iTime),'s-',num2str(falseRate(iTime))];
     iLine = iLine + 1;
 end
 plot([0,1],[0,1],'k-');

@@ -10,11 +10,9 @@ function dots = dotlist(specSeq,detectionTime,ROI)
 %
 % Outputs:
 % dots: each col is a point in n-dimension space
-%
-seqSum = []; % sum of spectrum
-for i = 1:floor(size(specSeq,2)/detectionTime)
-    seqSum = [seqSum,sum(specSeq(:,detectionTime*(i-1)+1:detectionTime*i),2)];
-end
+% 
+
+seqSum = combinespectra(specSeq,detectionTime);
 
 ROInames = fields(ROI);
 for i = 1:length(ROInames)
