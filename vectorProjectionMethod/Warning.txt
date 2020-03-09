@@ -1,0 +1,5 @@
+goProjVector.mlx
+goProjVector_bkup.mlx
+
+Open very slow!!! Maybe the reason is 
+Using inv(mat) around 600 times and each one has a warning of large condition number.
