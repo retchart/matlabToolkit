@@ -18,10 +18,11 @@ x=c1+r*a(1)*cos(theta)+r*b(1)*sin(theta);%圆上各点的x坐标
 y=c2+r*a(2)*cos(theta)+r*b(2)*sin(theta);%圆上各点的y坐标
 z=c3+r*a(3)*cos(theta)+r*b(3)*sin(theta);%圆上各点的z坐标
 
-plot3(x,y,z)
+plot3(x,y,z,'LineWidth',5)
 xlabel('x轴')
 ylabel('y轴')
 zlabel('z轴')
+axis equal
 grid on
 hold on
-plot3([0 1],[0 1],[0 1]);
+plot3([0 1],[0 1],[0 1],'LineWidth',5);

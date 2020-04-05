@@ -1,6 +1,6 @@
 clear;close all;
-FILE_NAMES_BKGD = {'Aug4'};
-FILE_NAMES_SMPL = {'P11';'P13';'P15';'P21';'P22';'P23';'P24';'P25';'P31';'P33';'P35'};
+FILE_NAMES_BKGD = {'P00-step0.01MeV-nml'};
+FILE_NAMES_SMPL = {'P11-step0.01MeV-nml'};%;'P13';'P15';'P21';'P22';'P23';'P24';'P25';'P31';'P33';'P35'};
 ENERGY_AXIS = [0.01:0.01:12]';
 OUTLIER_THRESHOLD = 3; % times of variance out which the dots are regard as outlier
 ACC_STABLE_TIMESTAMP = 150;
