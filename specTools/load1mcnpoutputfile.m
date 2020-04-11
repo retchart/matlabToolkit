@@ -5,6 +5,7 @@ function [spec,specFirstRowNo] = load1mcnpoutputfile(fileName,specStartLineSymbo
 % Inputs:
 % fileName: MCNP output file name
 % specStartLineSymbol: which line is considered to be the n-2 line of spec
+%                      typicaly,n-1 line only have a word 'energy'
 %
 %
 % Outputs:
