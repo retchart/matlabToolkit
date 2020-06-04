@@ -21,7 +21,7 @@ for i = size(set1,1):-1:1
         % disp(['Notice: Deleted row ',num2str(i)]);
     end
 end
-disp(['Notice: Data > channel#',num2str(size(set1,1)),' is deleted since they are zero']);
+%disp(['Notice: Data > channel#',num2str(size(set1,1)),' is deleted since they are zero']);
 
 n1 = size(set1,2);
 n2 = size(set2,2);
@@ -30,7 +30,7 @@ meanVec2 = mean(set2,2);
 withinClassMat1 = cov(set1')*(n1-1);
 withinClassMat2 = cov(set2')*(n2-1);
 sw = withinClassMat1 + withinClassMat2;
-warning(['Condition number: ',num2str(cond(sw))]);
+%warning(['Condition number: ',num2str(cond(sw))]);
 vec = inv(sw)*(meanVec2-meanVec1)*(n1+n2-2);
 vec = [vec;zeros(size(set10,1)-size(vec,1),1)];
 % index1 = vec'*set10;

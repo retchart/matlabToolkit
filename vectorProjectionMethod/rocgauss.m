@@ -1,10 +1,10 @@
-function [roc,auc] = rocgauss(index1,index2,nTh)
+function [roc,auc] = rocgauss(index1,index2,nSeg)
 % Give the Receiver operating characteristic(ROC) curve
 % of two samples which come from Gauss districution
 % Inputs: 
 % index1: one sample set from gauss distribution (One column)
 % index2: one sample set from gauss distribution (One column)
-% nTh: how many points shape the ROC curve 
+% nSeg: how many points shape the ROC curve ,eg.500
 %
 % Outputs:
 % roc: 1st column - False positive rate(FPR) Horizontal axis
@@ -31,7 +31,7 @@ thUP  = max([norminv(1-0.001,u1,sigma1);norminv(1-0.001,u2,sigma2)]);
 thLOW = min([norminv(0.001,u1,sigma1);norminv(0.001,u2,sigma2)]);
 
 %% calculate ROC curve
-th = (thLOW:(thUP-thLOW)/(nTh+1):thUP)';
+th = (thLOW:(thUP-thLOW)/(nSeg+1):thUP)';
 roc = zeros(size(th,1),2);
 for i=1:size(th,1)
     roc(i,1) = 1 - normcdf(th(i),u1,sigma1);
