@@ -36,7 +36,7 @@ ROI_TITLE.TEST = 'test';
 % NOTICE: The titles and x/y labels of following figures show what ROIs are 
 % used. 
 
-ROI_SELECTED = {'Cl35b','Cl35c'};
+ROI_SELECTED = {'Cl35b','Cl35c'}; % used to delete outlier
 
 % Keep ROIs in ROI_SELECTED
 nameTmp = fieldnames(ROI);
@@ -53,13 +53,13 @@ ROI_NAMES = fieldnames(ROI_TITLE);
 % 1.1 Import data
 % Spectra should be normalized in advance.
 
-bkgd = loadnormalizedseq('Aug6-0kg-step0.01MeV-nml');
-smpl_P{1,1} = loadnormalizedseq('P11-1kg-step0.01MeV-nml');
-smpl_P{1,2} = loadnormalizedseq('P13-1kg-step0.01MeV-nml');
-smpl_P{2,1} = loadnormalizedseq('P21-1kg-step0.01MeV-nml');
-smpl_P{2,2} = loadnormalizedseq('P23-1kg-step0.01MeV-nml');
-smpl_P{3,1} = loadnormalizedseq('P31-1kg-step0.01MeV-nml');
-smpl_P{3,2} = loadnormalizedseq('P33-1kg-step0.01MeV-nml');
+bkgd = loadnormalizedseq('P00-step0.01MeV-nml-delo');
+smpl_P{1,1} = loadnormalizedseq('P11-1kg-step0.01MeV-nml-delo');
+smpl_P{1,2} = loadnormalizedseq('P13-1kg-step0.01MeV-nml-delo');
+smpl_P{2,1} = loadnormalizedseq('P21-1kg-step0.01MeV-nml-delo');
+smpl_P{2,2} = loadnormalizedseq('P23-1kg-step0.01MeV-nml-delo');
+smpl_P{3,1} = loadnormalizedseq('P31-1kg-step0.01MeV-nml-delo');
+smpl_P{3,2} = loadnormalizedseq('P33-1kg-step0.01MeV-nml-delo');
 % 1.2 Pre-processing
 % Delete the outliers in the spectra sequences. Counts of the spectra's sum 
 % and of the ROI sum are used and illustrated.

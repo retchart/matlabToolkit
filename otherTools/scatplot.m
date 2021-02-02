@@ -1,21 +1,23 @@
 function out = scatplot(x,y,method,radius,N,n,po,ms)
 % Scatter plot with color indicating data density
 %
+% Substitute: histogram2
+%
 % USAGE:
 %   out = scatplot(x,y,method,radius,N,n,po,ms)
 %   out = scatplot(x,y,dd)
 %
 % DESCRIPTION:
-%   Draws a scatter plot with a colorscale 
-%   representing the data density computed 
+%   Draws a scatter plot with a colorscale
+%   representing the data density computed
 %   using three methods
 %
 % INPUT VARIABLES:
 %   x,y - are the data points
 %   method - is the method used to calculate data densities:
-%       'circles' - uses circles with a determined area 
+%       'circles' - uses circles with a determined area
 %               centered at each data point
-%       'squares' - uses squares with a determined area 
+%       'squares' - uses squares with a determined area
 %               centered at each data point
 %       'voronoi' - uses voronoi cells to determin data densities
 %               default method is 'voronoi'
@@ -23,7 +25,7 @@ function out = scatplot(x,y,method,radius,N,n,po,ms)
 %       used to calculate the data densities if
 %       (Note: only used in methods 'circles' and 'squares'
 %           default radius is sqrt((range(x)/30)^2 + (range(y)/30)^2)
-%   N - is the size of the square mesh (N x N) used to  
+%   N - is the size of the square mesh (N x N) used to
 %       filter and calculate contours
 %       default is 100
 %   n - is the number of coeficients used in the 2-D
@@ -47,7 +49,7 @@ function out = scatplot(x,y,method,radius,N,n,po,ms)
 %       ddf - filtered data densities at (x,y)
 %       radius - area used in 'circles' and 'squares'
 %               methods to calculate densities
-%       xi - x coordenates for zi matrix 
+%       xi - x coordenates for zi matrix
 %       yi - y coordenates for zi matrix
 %       zi - unfiltered data densities at (xi,yi)
 %       zif - filtered data densities at (xi,yi)
@@ -61,32 +63,32 @@ if nargin==0
     scatplotdemo
     return
 end
-if nargin<3 | isempty(method)
+if nargin<3 || isempty(method)
     method = 'vo';
 end
 if isnumeric(method)
-   gsp(x,y,method,2)
-   return
+    gsp(x,y,method,2)
+    return
 else
     method = method(1:2);
 end
-if nargin<4 | isempty(n)
+if nargin<4 || isempty(n)
     n = 5; %number of filter coefficients
 end
-if nargin<5 | isempty(radius)
+if nargin<5 || isempty(radius)
     radius = sqrt((range(x)/30)^2 + (range(y)/30)^2);
 end
-if nargin<6 | isempty(po)
+if nargin<6 || isempty(po)
     po = 1; %plot option
 end
-if nargin<7 | isempty(ms)
+if nargin<7 || isempty(ms)
     ms = 4; %markersize
 end
-if nargin<8 | isempty(N)
+if nargin<8 || isempty(N)
     N = 100; %length of grid
 end
 %Correct data if necessary
-x = x(:);
+x = x(:); % change to N*1 column vector
 y = y(:);
 %Asuming x and y match
 idat = isfinite(x);
@@ -129,25 +131,25 @@ switch po
         colorbar
     case {3,4}
         if po>3
-           % dd=textread('C:\Users\novas\Documents\MATLAB\meshtalmc11_1.txt');
+            % dd=textread('C:\Users\novas\Documents\MATLAB\meshtalmc11_1.txt');
             [c,h] = contour(xi,yi,zi);
             out.c = c;
-          % caxis([0.0001 0.0003]);
+            % caxis([0.0001 0.0003]);
         end %if
         hs = gsp(x,y,dd,ms);
         out.hs = hs;
-%          colorbar
-%          colorbar('YTickLabel',{'0','7.9','15.8','23.7','31.6','39.5','47.4','55.3','63.2','71.1','79'});
-%  colorbar('YTickLabel',{'0','1.5','3.0','4.5','6.0','7.5','9.0','10.5','12.0','13.5','15.0'});
-%colorbar('YTickLabel',{'0','1','2','3','4','5','6','7','8','9','10'});
-colormap('jet');
-c=colorbar;
-c.TicksMode='auto';
-% c.TicksMode='manual';
-% c.Ticks=[0,1e-3,5e-3,1e-2];
- grid on;
-%          hh=colorbar;
-%          set(hh,'YTick',[0:0.08:0.8]);
+        %          colorbar
+        %          colorbar('YTickLabel',{'0','7.9','15.8','23.7','31.6','39.5','47.4','55.3','63.2','71.1','79'});
+        %  colorbar('YTickLabel',{'0','1.5','3.0','4.5','6.0','7.5','9.0','10.5','12.0','13.5','15.0'});
+        %colorbar('YTickLabel',{'0','1','2','3','4','5','6','7','8','9','10'});
+        colormap('jet');
+        c=colorbar;
+        c.TicksMode='auto';
+        % c.TicksMode='manual';
+        % c.Ticks=[0,1e-3,5e-3,1e-2];
+        grid on;
+        %          hh=colorbar;
+        %          set(hh,'YTick',[0:0.08:0.8]);
 end %switch
 %------Relocate variables and place NaN's ----------
 dd(idat) = dd;
@@ -177,7 +179,7 @@ ms = 5;
 x = randn(1000,1);
 y = randn(1000,1);
 
-out = scatplot(x,y,method,radius,N,n,po,ms)
+out = scatplot(x,y,method,radius,N,n,po,ms);
 
 return
 %~~~~~~~~~~ Data Density ~~~~~~~~~~~~~~
@@ -209,12 +211,12 @@ switch method %Calculate Data Density
         area = pi*r^2;
         dd = dd/area/1e7;
     case 'vo'  %----- Using voronoi cells ------
-        [v,c] = voronoin([x,y]);     
-        for k=1:length(c) 
-            %If at least one of the indices is 1, 
+        [v,c] = voronoin([x,y]);
+        for k=1:length(c)
+            %If at least one of the indices is 1,
             %then it is an open region, its area
             %is infinity and the data density is 0
-            if all(c{k}>1)   
+            if all(c{k}>1)
                 a = polyarea(v(c{k},1),v(c{k},2));
                 dd(k) = 1/a;
             end %if
@@ -229,15 +231,14 @@ ind = fix((c-min(c))/(max(c)-min(c))*(size(map,1)-1))+1;
 %ind=scatter(x,y,c);
 h = [];
 %much more efficient than matlab's scatter plot
-for k=6:size(map,1) 
+for k=1:size(map,1)
     if any(ind==k)
         h(end+1) = line('Xdata',x(ind==k),'Ydata',y(ind==k), ...
             'LineStyle','none','Color',map(k,:), ...
-            'Marker','o','MarkerSize',ms);
+            'Marker','.','MarkerSize',ms);
     end
 end
 if nargout==1
-    varargout{1} = h; 
+    varargout{1} = h;
 end
 return
-grid on;

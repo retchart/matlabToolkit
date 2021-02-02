@@ -37,6 +37,6 @@ vec = [vec;zeros(size(set10,1)-size(vec,1),1)];
 % index2 = vec'*set20;
 % th = (mean(index1)*n1+mean(index2)*n2)/(n1+n2);
 
-vec = vec/sqrt(sum(vec.^2)); % Normalized
+vec = vec/norm(vec); % Normalized
 
 end

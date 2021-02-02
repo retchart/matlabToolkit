@@ -1,20 +1,23 @@
-function [newmat,errorCode] = resizemat(mat,sizes)
+function [newmat,errorCode] = resizemat_cut(mat,sizes)
 % resize 2D matrix 'mat' into sizes(1)*sizes(2) 'newmat'
-%
+% cut if size of mat cannot be divided by 'sizes'
 % INPUTS:
 % mat: 2D matrix
-% sizes: 1 raw 2 col
-% 
+% sizes: 1:raw 2:col
+%
 % OUTPUTS:
 % newmat: resized matrix
 % errorCode: 1 size of 'mat' can not divided by 'sizes'
 %            2
 %
-newmat = 0;errorCode = 0;
-if mod(size(mat,1),sizes(1)) > 0 || mod(size(mat,2),sizes(2)) > 0
-    disp('Error: resizemat invalid input sizes');
+errorCode = 0;
+if mod(size(mat,1),sizes(1)) > 0 
+    mat(end-mod(size(mat,1),sizes(1))+1:end,:)=[];
     errorCode = 1;
-    return;
+end
+if mod(size(mat,2),sizes(2)) > 0
+    mat(:,end-mod(size(mat,2),sizes(2))+1:end)=[];
+    errorCode = 1;
 end
 mat(isnan(mat))=0;
 newmat = zeros(sizes);
@@ -47,6 +50,5 @@ elseif size(mat,1)==size(newmat,1) && size(mat,2)~=size(newmat,2)
 elseif size(mat,1)==size(newmat,1) && size(mat,2)==size(newmat,2)
     newmat = mat;
 end
-
 end
 

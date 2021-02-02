@@ -28,7 +28,7 @@ for i = 1:size(y,1)
 end
 figure;hold on;
 for i = 1:size(yy,2)
-    handle = plot(x,yy(:,i),'x');
+    handle = plot(x,yy(:,i),'.');
 end
 ax = axis;
 axis([ax(1),ax(2),-max([abs(ax(3)),abs(ax(4))]),max([abs(ax(3)),abs(ax(4))])]);

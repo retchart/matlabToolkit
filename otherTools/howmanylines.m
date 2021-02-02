@@ -1,5 +1,5 @@
 function nLine = howmanylines(fileName)
-% return number of lines in file
+% return number of lines in a file
 % 
 % Inputs:
 % fileName

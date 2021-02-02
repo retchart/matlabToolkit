@@ -18,7 +18,7 @@ for i = size(set1,1):-1:1
     if sum(set1(i,:))+sum(set2(i,:)) == 0
         set1(i,:)=[];
         set2(i,:)=[];
-        disp(num2str(i));
+        %disp(num2str(i));
     end
 end
 disp(['Notice: Data > channel-',num2str(size(set1,1)),' is deleted since they are zero']);

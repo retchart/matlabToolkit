@@ -26,6 +26,12 @@ if u1>u2 % switch to make u2>u1
     sigma3=sigma1;sigma1=sigma2;sigma2=sigma3;
 end
 
+if sum(index1)==0&&sum(index2)==0
+    auc = 0.5;
+    roc=[0,0;1,1];
+    return;
+end
+
 %% Found up and low bondary of the threshold
 thUP  = max([norminv(1-0.001,u1,sigma1);norminv(1-0.001,u2,sigma2)]);
 thLOW = min([norminv(0.001,u1,sigma1);norminv(0.001,u2,sigma2)]);

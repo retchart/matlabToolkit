@@ -11,42 +11,32 @@ function [orgnSpec,nmldSpec] = ...
 
 maxEnergyRange = 12; % MeV
 energyAxis = (energyStep:energyStep:maxEnergyRange)';
-if nargin < 5
-    PeakE1 = 0.478;
-    PeakE2 = 2.223;
-    PeakRange1 = [65,79];
-    PeakRange2 = [330,359];
-end
 %% 导入数据
 if ischar(nameOrSpec) % 是文件
-    specStartStr = '$DATA:';
-    fid = fopen(nameOrSpec,'r');
-    for i =1:2100
-        dataRow = fgetl(fid);
-        if strncmp(dataRow,specStartStr,6)
-            specStartRow = i;
-            break;
-        end
-    end
-    fclose(fid);
-    fileData = importdata(nameOrSpec,'',specStartRow+1);
-    spec = fileData.data;% 无刻度单列能谱，纵坐标计数count/ch
+    spec = readspe(nameOrSpec);
 else %是能谱矩阵
     spec = sum(nameOrSpec,2);
 end
 
 %% 作原始数据图
 if plotOrNot
-    figure;
-    semilogy(spec,'o-');xlabel('Channel');ylabel('Count rate(count/ch)');grid on;
+    h=figure;subplot(221);
+    jFrame = get(h,'JavaFrame');
+    set(jFrame,'Maximized',1);
+    semilogy(spec,'.-');xlabel('Channel');ylabel('Count rate(count/ch)');grid on;
 end
 
 %% 寻峰(使用计数率图)
-[~,~,~,~,~,peak_511,~] = fitPeak((PeakRange1(1):PeakRange1(2))',spec(PeakRange1(1):PeakRange1(2))/measureTime,plotOrNot);
-[~,~,~,~,~,peak_H2223,~] = fitPeak((PeakRange2(1):PeakRange2(2))',spec(PeakRange2(1):PeakRange2(2))/measureTime,plotOrNot);
-
+if plotOrNot
+    subplot(223);
+end
+[~,~,~,~,~,peak_1,~] = fitPeak((PeakRange1(1):PeakRange1(2))',spec(PeakRange1(1):PeakRange1(2))/measureTime,plotOrNot);
+if plotOrNot
+    subplot(224);
+end
+[~,~,~,~,~,peak_2,~] = fitPeak((PeakRange2(1):PeakRange2(2))',spec(PeakRange2(1):PeakRange2(2))/measureTime,plotOrNot);
 %% 刻度
-originalEScale = (PeakE2-PeakE1)*((1:size(spec,1))'-peak_511)/(peak_H2223-peak_511)+PeakE1;
+originalEScale = (PeakE2-PeakE1)*((1:size(spec,1))'-peak_1)/(peak_2-peak_1)+PeakE1;
 orgnSpec = spec/measureTime; % Unit of spec: cps/ch
 orgnSpec = orgnSpec*(energyAxis(5,1)-energyAxis(4,1))/ ...
     (originalEScale(5,1)-originalEScale(4,1)); % Unit of spec: cps/enrgybin
@@ -57,14 +47,13 @@ nmldSpec = spline(orgnSpec(:,1),orgnSpec(:,2),energyAxis);
 nmldSpec(find(nmldSpec<1/measureTime^2))=0; % 测量总时长都无计数对应的计数率为1/measureTime^2
 nmldSpec = [energyAxis,nmldSpec];
 if plotOrNot
-    figure;
+    subplot(222);
     semilogy(orgnSpec(:,1),orgnSpec(:,2),'o');hold on;grid on;
     semilogy(nmldSpec(:,1),nmldSpec(:,2),'.-');
     xlabel('Energy(MeV)');ylabel(['Count rate(cps/',num2str(energyStep),'MeV)']);
     legend('Original','Normalized');
+    xlim([0,maxEnergyRange]);
+    pause(0.5);
 end
-
-% disp(['原谱总计数率：',num2str(sum(spec)/measureTime),'cps']);
-% disp(['标准化谱总计数率:',num2str(sum(normalizedSpec(:,2))),'cps']);
 
 end % of function

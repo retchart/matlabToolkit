@@ -22,4 +22,5 @@ disp(['ÑÓ³Ù£º',num2str(delay/10),'us']);
 disp(['ÑÓ³Ù²¦Âë(UPPER->LOWER)£º',num2str(delayCode)]);
 disp(['Õ¹¿í£º',num2str(broaden/10),'us']);
 disp(['Õ¹¿í²¦Âë(H->L)£º',num2str(broadenCode)]);
+disp('-----------------------------------');
 end

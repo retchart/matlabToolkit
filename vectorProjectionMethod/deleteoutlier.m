@@ -1,4 +1,4 @@
-function newSpecSeq = deleteoutlier(specSeq,stableTime,ROI,outlierThresh,plotOrNot)
+function [newSpecSeq,deletedNos] = deleteoutlier(specSeq,stableTime,ROI,outlierThresh,plotOrNot)
 % Detele spectra whose counts in ROI are outliers
 % 
 % Inputs:
@@ -35,6 +35,7 @@ if stableTime~=1
     deletedSpecNo = [deletedSpecNo,1:stableTime-1];
 end
 delSeg = [delSeg;size(deletedSpecNo,2)];
+deletedNos = unique(deletedSpecNo);
 newSpecSeq=specSeq;
 newSpecSeq(:,unique(deletedSpecNo)) = [];
 
