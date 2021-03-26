@@ -1,25 +1,44 @@
 %% 从orgnList文件获得2维能谱和符合曲线
 clear;close all;
-roiNo = 4;
-coin_time = 500; % unit: ns
-dataName = 'nacl';% Name of the list mode file
+roiNo = 1; % 仅保存名称使用
+coin_time = 1000; % unit: ns
+dataName = 'nothing';% Name of the list mode file
 load([dataName,'.mat']);
 
 maxChx =8192; % 纵轴道数
 maxChy = maxChx; % 横轴道数
-winChx = [100,maxChx];
-winChy = [100,maxChy];
+winChx = [100:maxChx];
+winChy = [100:maxChy];
+% winChx = [5100:6900];
+winChx = [1920:1967];
+winChy = [200:8000];
 % load('lib_grid.mat');
 % winChx = [grid_x(2*roiNo-1),grid_x(2*roiNo)];
 % winChy = [grid_y(9-2*roiNo),grid_y(10-2*roiNo)];
 timeDelay = (-1e4:100:0)'; % unit: ns
-chx = 3;
-chy = 4;
-tRange = [0,120]*60*1e9;% 括号内分钟
+chx = 1;
+chy = 2;
+tRange = [0,10]*60*1e9;% 括号内分钟
 eventList = [s.list{1,chx};s.list{1,chy}];
-eventList(find(eventList(:,1)>tRange(2)),:)=[];
+eventList(find(eventList(:,1)>tRange(2)),:)=[]; % 删除过于离谱的时刻
 eventList(find(eventList(:,1)<tRange(1)),:)=[];
- 
+% 画能谱
+figure; 
+subplot(211);
+a=eventList(find(eventList(:,2)==chx),3);
+[ccc,eee]=hist(a,1:maxChx);
+semilogy(eee,ccc);hold on;
+semilogy(eee(winChx),ccc(winChx));
+xlabel('Ch');ylabel('Count');
+title(['Sum of ROI=',num2str(sum(ccc(winChx)))]);
+subplot(212);
+a=eventList(find(eventList(:,2)==chy),3);
+[ccc,eee]=hist(a,1:maxChy);
+semilogy(eee,ccc);hold on;
+semilogy(eee(winChy),ccc(winChy));
+xlabel('Ch');ylabel('Count');
+title(['Sum of ROI=',num2str(sum(ccc(winChy)))]);
+
 coinCurve = [timeDelay,zeros(size(timeDelay,1),1)];
 for j = 1:length(timeDelay)
     seq = eventList;
@@ -48,14 +67,14 @@ for j = 1:length(timeDelay)
                 ' Event No.',num2str(i),'/',num2str(length(seq))]);
         end
     end
-    coinCurve(j,2) = sum(sum(spec2D(winChx(1):winChx(2),winChy(1):winChy(2))));
+    coinCurve(j,2) = sum(sum(spec2D(winChx,winChy)));
 end
 figure;
 plot(coinCurve(:,1),coinCurve(:,2),'.-');
 xlabel('Time delay(ns)');
 ylabel('Coincidence count');
-title({['winChx=[',num2str(winChx(1)),',',num2str(winChx(2)),']'];
-    ['winChy=[',num2str(winChy(1)),',',num2str(winChy(2)),']']});
+title({['winChx=[',num2str(winChx(1)),'……',num2str(winChx(end)),']'];
+    ['winChy=[',num2str(winChy(1)),'……',num2str(winChy(end)),']']});
 grid on;
 save([dataName,'-coinCurve-roi',num2str(roiNo),'-',num2str(coin_time),'ns']);
 

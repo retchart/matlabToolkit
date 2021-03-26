@@ -8,7 +8,7 @@ function [orgnSpec,nmldSpec] = ...
 % caliParam.Ewin(i,1)~(i,2)第i个能峰所在的大致道址区间 
 % caliParam.EStep 能量步长(MeV)
 % caliParam.maxE 最大能量(MeV)
-% caliParam.tPerFile 每个文件的测量时长，仅用于删除过小拟合值
+% caliParam.tPerFile 每个文件的测量时长s，仅用于删除过小拟合值
 %
 % OUTPUTS:
 % orgnSpec: 若nameOrSpec为文件名，则为获取的单列能谱，若为矩阵则为横向和

@@ -3,13 +3,13 @@
 % 本脚本虽也可计算coincurve，但因计算2D能谱速度较慢
 
 clear;close all;
-dataName = 'nacl';% Name of the list mode file
+dataName = 'co-coinCurve-roi1-500ns';% Name of the list mode file
 load([dataName,'.mat']); % 导入 eventList
 coin_time = 500; % unit: ns
-timeDelay = (-1000:100:1000)'; % unit: ns
+timeDelay = (-4000:100:2000)'; % unit: ns
 maxCh_a = 8192;
 maxCh_b = maxCh_a;
-chSelect = [3,4]; % 用以符合的道址
+chSelect = [1,2]; % 用以符合的道址
 size_smallspec = [256,256];
 coinWinCh_a = [100,8192]; % 符合曲线的ROI
 coinWinCh_b = [100,8192];

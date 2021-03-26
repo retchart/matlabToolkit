@@ -3,7 +3,7 @@ function s = readlist2(fileExp,saveName)
 % 相比readlist,拆分了不同输入道的list
 % 保存能谱结构体
 % list矩阵会很长，需要注意
-% 目前不能读取ch0的数值
+% 目前不能读取ch0的数值,APG7400也没有第0道
 %
 % INPUTS：
 % fileExp: 文件名正则表达式

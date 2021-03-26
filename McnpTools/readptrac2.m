@@ -1,4 +1,4 @@
-function [dataout,HeadData]=readptrac( outputType,nps,maxEventsPerHistory,nHeadLine )
+function [dataout,HeadData]=readptrac2(filename,outputType,nps,maxEventsPerHistory,nHeadLine)
 % Transform mcnp output file to matlab matrix (3D or 2D)
 % 
 % outputType:
@@ -12,15 +12,7 @@ function [dataout,HeadData]=readptrac( outputType,nps,maxEventsPerHistory,nHeadL
 if(maxEventsPerHistory<=0)
     maxEventsPerHistory = 4000;
 end
-[filename,pathname]=uigetfile('*.*','Chose a ptrac');%选择你所需要读取的文件
-if isequal(filename,0)
-    disp('User Canceled');
-    return;
-else
-    disp(['User selected--',fullfile(pathname,filename)]);
-end
-fp=fullfile(pathname,filename);
-fidin=fopen(fp);
+fidin=fopen(filename);
 dataout = cell(nps,1);
 HistoryBuffer = zeros(maxEventsPerHistory,10);
 History = 1;
@@ -75,12 +67,8 @@ elseif(History-nps<1)
     disp('Warning:输入的nps大于ptrac中粒子数，正在清理内存');
     dataout(History:end) = [];
 end
-FriendlyData = dataout;
-if(outputType==1)
-    save('CrackedPtrac','-v7.3','FriendlyData','HeadData'); %存储当前矩阵到当前目录
-elseif(outputType==2)
+if(outputType==2)
     %将FriendlyData的数据合并到一个矩阵中
-    save('CrackedPtrac','-v7.3','FriendlyData','HeadData'); %存储当前矩阵到当前目录
     FriendlyData = zeros(nps*maxEventsPerHistory,10);
     pp = 1;
     disp('Transforming cell data to 2D matrix ...');
@@ -92,6 +80,5 @@ elseif(outputType==2)
     end
     FriendlyData(pp:end,:) = [];
     dataout = FriendlyData;
-    save('CrackedPtrac','-v7.3','FriendlyData','HeadData'); %存储当前矩阵到当前目录
 end
 end

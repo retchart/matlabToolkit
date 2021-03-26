@@ -34,12 +34,12 @@ end
 for i = 1:howmanylines(fileName)
     dataRow = fgetl(fid);
     if strncmp(dataRow,specStartLineSymbol,length(specStartLineSymbol))
-        specFirstRowNo = i+2;
+        specFirstRowNo = i+1;
         break;
     end
 end
 
-d = importdata(fileName,' ',specFirstRowNo-1);
+d = importdata(fileName,' ',specFirstRowNo);
 spec = d.data;
 fclose(fid);
 
