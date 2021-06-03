@@ -9,8 +9,8 @@ function netArea = getnet(s,ch,method)
 
 switch method
     case 1
-        LL = ch-10;
-        HH = ch+10;
+        LL = ch-5;
+        HH = ch+5;
         netArea = sum(s(LL:HH,1))-(HH-LL+1)*mean([s(LL),s(HH)]);
     case 2
         % Ñ°ÕÒ¹Èµ×

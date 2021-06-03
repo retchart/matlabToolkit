@@ -5,7 +5,7 @@ area = 0;
 
 plotOrNot = sum(strcmp(varargin,'plot'));
 % matlab 内置寻峰函数灵敏度很高且不可调
-[~,pks] = findpeaks(yin);
+%[~,pks] = findpeaks(yin);
 
 % 三阶导数上升沿过零法
 yin_gra3 = gradient(gradient(gradient(yin)));

@@ -1,7 +1,6 @@
 %% 从seq文件获得2维能谱
 % 建议先使用coincurve脚本寻找合适的延时时间
 % 
-
 clear;close all;
 dataName = 'nacl';% Name of the list mode file
 load([dataName,'.mat']);

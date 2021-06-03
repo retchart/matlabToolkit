@@ -19,7 +19,7 @@ for i = 1:size(energyList,1)
     disp(['Current: ',num2str(energyList(i,1)),'MeV (',num2str(i), ...
         '/',num2str(size(energyList,1)),')']);
     workName = [num2str(i),'.i'];
-    genInput(tpltFileName,workName,energyList(i,1),nps);
+    geninput(tpltFileName,workName,energyList(i,1),nps);
     disp(['MCNP start: ',datestr(now)]);
     if isunix
         [~,~]=system(['mpirun.lsf mcnp5.mpi.impi_intel i=',num2str(i), ...

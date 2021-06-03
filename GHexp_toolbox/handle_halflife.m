@@ -4,10 +4,10 @@
 
 clear;close all;
 load('pks.mat');
-filename = 'data-nml.mat';
+filename = 'data.mat';
 load(filename);
-pks(:,2)=eAxis(pks(:,1),1);
-
+%pks(:,2)=eAxis(pks(:,1),1);
+pks(:,2) = 0;
 %% 有样品的第一个能谱序号
 f=figure;
 plot(sum(sgnl,1),'.-');xlabel('No.');ylabel('Total count');
@@ -16,8 +16,9 @@ nStart = input('Enter the first spec No. to be fit: ');
 close(f);
 
 %% 删起始的本底谱
-sp = sgnl2(:,nStart:end); % 计数率
+sp = sgnl(:,nStart:end); % 计数率
 tt = t(nStart:end);
+tt = tt-tt(1);
 seq = zeros(size(pks,1),size(sp,2));
 
 %% 取峰区净计数
@@ -65,7 +66,7 @@ for i = 1:size(pks,1) % 拟合
     result(i,6) = log(2)/cfun.u; % 半衰期s
 end
 disp('According to experiences, rSquare >0.7 is reasonable fit');
-save(['decay2-',filename],'result','pks','seq','tt','sp','eAxis','spec_meas');
+save(['decay2-',filename],'result','pks','seq','tt','sp');
 
 %% 缓发总能谱的峰净计数
 %disp('Enter to continue... ');pause();
@@ -78,5 +79,5 @@ for i = 1:size(pks,1) % 拟合
     [area(i,1),~,~,~,~,~] = fitPeak(rr,spec_meas(rr),0);
     area(i,2) = getnet(spec_meas,pks(i,1),1);
 end
-save(['decay2-',filename],'result','pks','seq','tt','sp','eAxis','spec_meas','area');
+save(['decay2-',filename],'result','pks','seq','tt','sp','spec_meas','area');
 disp('将result,area,tsum三个内容复制入excel');
