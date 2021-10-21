@@ -24,7 +24,7 @@ for i = 1:length(dir1)
     toc;
     allList = [allList;importdata(dir1(i).name)];
 end
-
+allList = sortrows(allList); % 按时刻从小到大排序
 ch_low = min(allList(:,2));ch_high = max(allList(:,2));
 
 if flag_spec || flag_sep

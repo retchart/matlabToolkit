@@ -1,4 +1,4 @@
-%% 自HPGe能谱411keV峰分析Au含量
+%% 自HPGe能谱411keV峰分析Au含量,双峰拟合以处理In-116m的416keV影响
 % 先使用handle_nmlHPGe得到标准化能谱
 clear;close all;
 filename = 'data';

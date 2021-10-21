@@ -69,7 +69,7 @@ elseif(History-nps<1)
 end
 if(outputType==2)
     %将FriendlyData的数据合并到一个矩阵中
-    FriendlyData = zeros(nps*maxEventsPerHistory,10);
+    FriendlyData = zeros(size(dataout,1)*maxEventsPerHistory,[]);
     pp = 1;
     disp('Transforming cell data to 2D matrix ...');
     for i=1:(History-1)

@@ -1,0 +1,9 @@
+#!/bin/sh
+#BSUB -q hpc_linux
+#BSUB -a intelmpi
+#BSUB -R "select[mem>20000]"
+#BSUB -n 1
+#BSUB -o output.%J
+#BSUB -e error.%J
+
+/apps/soft/MATLAB/R2011a/bin/matlab -r "autoRun;quit"

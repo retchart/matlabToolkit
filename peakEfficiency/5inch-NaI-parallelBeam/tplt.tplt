@@ -1,0 +1,21 @@
+energy response of 5-inch NaI
+1 1 -3.67 -1 imp:p=1
+2 0 1 -100 imp:p=1 
+100 0 100 imp:p=0 
+
+1   rcc 0 0 1e-9 0 0 12.7 6.35
+100 so 50
+
+m1 11023 0.5 53127 0.5  $ NaI 3.67g/cm3
+mode p 
+sdef par=2 erg=[ene] pos=0 0 0 axs=0 0 1 rad=d1 ext=0 vec=0 0 1 dir=1 
+si1 0 6.35
+sp1 -21 1 
+c sdef par=2 erg=[ene] x=d1 y=d2 z=0 vec=0 0 1 dir=1 
+c si1 -6.35 6.35
+c sp1 0 1 
+c si2 -6.35 6.35
+c sp2 0 1 
+f8:p 1
+e0 0.01 0.02 1197i 12
+nps [nps] 

@@ -18,5 +18,5 @@ m6 11023 1 17000 1 $ salt rock 2.18
 mode p 
 sdef par=2 erg=[var1] x=0 y=0 z=0 $ vec=0 0 1 dir= 1
 f8:p 1
-e8 0.01 1498i 15
+e8 0.010001 1498i 15.000001
 nps [var2] 

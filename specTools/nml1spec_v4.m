@@ -46,7 +46,7 @@ for i = 1:length(caliParam.E)
     subplot(ceil(length(caliParam.E)/2),2,i);
     end
     winwin = caliParam.Ewin(i,1):caliParam.Ewin(i,2);
-    [~,~,~,~,peakCh(i),~] = fitPeak(winwin',sum(spec(winwin),2)/size(spec,2),plotOrNot);
+    [~,~,~,peakCh(i),~] = fitPeak(winwin',sum(spec(winwin),2)/size(spec,2),plotOrNot);
 end
 pause(0.5);
 %% ¿Ì¶È

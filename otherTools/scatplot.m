@@ -31,7 +31,7 @@ function out = scatplot(x,y,method,radius,N,n,po,ms)
 %   n - is the number of coeficients used in the 2-D
 %       running mean filter
 %       default is 5
-%       (Note: if n is length(2), n(2) is tjhe number of
+%       (Note: if n is length(2), n(2) is the number of
 %       of times the filter is applied)
 %   po - plot options:
 %       0 - No plot
