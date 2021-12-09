@@ -1,0 +1,309 @@
+          Thread Name & Version = MCNP5_RSICC, 1.14
+                                _                                      
+          ._ _    _  ._   ._   |_                                      
+          | | |  (_  | |  |_)   _)                                     
+                          |                                            
+ +--------------------------------------------------------------------+
+ |   This program was prepared by the Regents of the University of    |
+ |California at Los Alamos National Laboratory (the University) under |
+ |  contract number W-7405-ENG-36 with the U.S. Department of Energy  |
+ |(DoE).  The University has certain rights in the program pursuant to|
+ |  the contract and the program should not be copied or distributed  |
+ | outside your organization.  All rights in the program are reserved |
+ |by the DoE and the University.  Neither the U.S. Government nor the |
+ | University makes any warranty, express or implied, or assumes any  |
+ |     liability or responsibility for the use of this software.      |
+ +--------------------------------------------------------------------+
+  
+1mcnp     version 5     ld=05052003                     03/04/21 21:11:26 
+ *************************************************************************                 probid =  03/04/21 21:11:26 
+ i=b501.i o=b501.o r=b501.r                                                      
+
+    1-       photon eff                                                                      
+    2-       11 1 -2.0 1 -2 imp:p=1  $ Li2CO3                                                
+    3-       21 2 -3.67 2 -3 imp:p=1 $ NaI                                                   
+    4-       33 0 -100 #11 #21 imp:p=1                                                       
+    5-       99 0 100 imp:p=0                                                                
+    6-                                                                                       
+    7-       1 rpp -20.002 20.002 -5   5 -3 3                                                
+    8-       2 rpp -20.001 20.001 -10 10 -8 8                                                
+    9-       3 rpp -20     20     -20 20 -18 18                                              
+   10-       100 rpp -9876 9876 -9876 9876 -9876 9876                                        
+   11-                                                                                       
+   12-       m1 3000 2 6000 1 8016 3 $ Li2CO3(2)                                             
+   13-       m2 11000 1 53000 1 $NaI(3.67)                                                   
+   14-       mode p                                                                          
+   15-       c cut:n 2j 0 2j $ direct simulate neutrons                                      
+   16-       c phys:n j 100 2j $ direct simulate neutrons                                    
+   17-       sdef par=2 erg=8 x=0 y=0 z=0                                                    
+   18-       f8:p 21                                                                         
+   19-       e8 0.001 0.99999 1.00001 1.99999 2.00001 2.99999 3.00001 3.99999 4.00001        
+   20-             4.99999 5.00001 5.99999 6.00001 6.99999 7.00001 7.99999 8.00001           
+   21-       nps 1e5                                                                         
+   22-       prdmp j 1e4 j 2                                                                 
+ 
+ warning. tally   8 needs zero energy bin for negative f8 scores.
+ 
+ warning.   2 materials had unnormalized fractions. print table 40.
+1cells                                                                                                  print table 60
+
+                      atom        gram                                     photon                                      
+        cell  mat    density     density     volume       mass     pieces importance                                   
+
+     1    11    1  9.78165E-02 2.00000E+00 1.04005E+04 2.08010E+04     0  1.0000E+00                                   
+     2    21    2  2.94887E-02 3.67000E+00 4.48000E+04 1.64416E+05     0  1.0000E+00                                   
+     3    33    0  0.00000E+00 0.00000E+00 7.70607E+12 0.00000E+00     0  1.0000E+00                                   
+     4    99    0  0.00000E+00 0.00000E+00 0.00000E+00 0.00000E+00     0  0.0000E+00                                   
+
+ total                                     7.70607E+12 1.85217E+05
+
+    minimum source weight = 1.0000E+00    maximum source weight = 1.0000E+00
+
+ ***************************************************
+ * Random Number Generator  =                    1 *
+ * Random Number Seed       =       19073486328125 *
+ * Random Number Multiplier =       19073486328125 *
+ * Random Number Adder      =                    0 *
+ * Random Number Bits Used  =                   48 *
+ * Random Number Stride     =               152917 *
+ ***************************************************
+
+
+         2 warning messages so far.
+1cross-section tables                                                                                   print table 100
+
+     table    length
+
+                        tables from file mcplib84                                                        
+
+   3000.84p    2339  Update of MCPLIB04 Photon Compton Broadening Data For MCNP5 see LA-UR-    12-00018        01/03/12
+   6000.84p    3152  Update of MCPLIB04 Photon Compton Broadening Data For MCNP5 see LA-UR-    12-00018        01/03/12
+   8000.84p    3272  Update of MCPLIB04 Photon Compton Broadening Data For MCNP5 see LA-UR-    12-00018        01/03/12
+  11000.84p    3995  Update of MCPLIB04 Photon Compton Broadening Data For MCNP5 see LA-UR-    12-00018        01/03/12
+  53000.84p    8492  Update of MCPLIB04 Photon Compton Broadening Data For MCNP5 see LA-UR-    12-00018        01/03/12
+
+  total       21250
+
+ maximum photon energy set to  100.0 mev (maximum electron energy)
+
+                        tables from file el03                                                            
+
+   3000.03e    2331                                                                                          6/6/98    
+   6000.03e    2333                                                                                          6/6/98    
+   8000.03e    2333                                                                                          6/6/98    
+  11000.03e    2337                                                                                          6/6/98    
+  53000.03e    2359                                                                                          6/6/98    
+
+ ***********************************************************************************************************************
+ dump no.    1 on file b502.r       nps =         0     coll =              0     ctm =    0.00     nrn =              0
+
+
+         2 warning messages so far.
+
+ ***********************************************************************************************************************
+ dump no.    2 on file b502.r       nps =     10000     coll =         100162     ctm =    0.01     nrn =        1195047
+
+
+ ***********************************************************************************************************************
+ dump no.    3 on file b502.r       nps =     20000     coll =         200407     ctm =    0.01     nrn =        2390043
+
+
+ ***********************************************************************************************************************
+ dump no.    4 on file b502.r       nps =     30000     coll =         301016     ctm =    0.02     nrn =        3591780
+
+
+ ***********************************************************************************************************************
+ dump no.    5 on file b502.r       nps =     40000     coll =         401056     ctm =    0.02     nrn =        4785819
+
+
+ ***********************************************************************************************************************
+ dump no.    6 on file b502.r       nps =     50000     coll =         501302     ctm =    0.03     nrn =        5983561
+
+
+ ***********************************************************************************************************************
+ dump no.    7 on file b502.r       nps =     60000     coll =         602044     ctm =    0.03     nrn =        7186445
+
+
+ ***********************************************************************************************************************
+ dump no.    8 on file b502.r       nps =     70000     coll =         701073     ctm =    0.04     nrn =        8368984
+
+
+ ***********************************************************************************************************************
+ dump no.    9 on file b502.r       nps =     80000     coll =         801350     ctm =    0.05     nrn =        9564532
+
+
+ ***********************************************************************************************************************
+ dump no.   10 on file b502.r       nps =     90000     coll =         902464     ctm =    0.05     nrn =       10771440
+
+1problem summary                                                                                                       
+
+      run terminated when    100000 particle histories were done.
++                                                                                                    03/04/21 21:11:30 
+      photon eff                                                                           probid =  03/04/21 21:11:26 
+0
+ photon creation     tracks      weight        energy            photon loss         tracks      weight        energy
+                                 (per source particle)                                           (per source particle)
+
+ source              100000    1.0000E+00    8.0000E+00          escape               65341    6.5341E-01    2.5201E+00
+                                                                 energy cutoff            0    0.            5.7318E-04
+                                                                 time cutoff              0    0.            0.        
+ weight window            0    0.            0.                  weight window            0    0.            0.        
+ cell importance          0    0.            0.                  cell importance          0    0.            0.        
+ weight cutoff            0    0.            0.                  weight cutoff            0    0.            0.        
+ e or t importance        0    0.            0.                  e or t importance        0    0.            0.        
+ dxtran                   0    0.            0.                  dxtran                   0    0.            0.        
+ forced collisions        0    0.            0.                  forced collisions        0    0.            0.        
+ exp. transform           0    0.            0.                  exp. transform           0    0.            0.        
+ from neutrons            0    0.            0.                  compton scatter          0    0.            3.0313E+00
+ bremsstrahlung      320769    3.2077E+00    4.9724E-01          capture             566789    5.6679E+00    4.7355E-01
+ p-annihilation       76244    7.6244E-01    3.8961E-01          pair production      38122    3.8122E-01    2.9048E+00
+ photonuclear             0    0.            0.                  photonuclear abs         0    0.            0.        
+ electron x-rays          0    0.            0.                                                                        
+ 1st fluorescence    163059    1.6306E+00    4.3069E-02                                                                
+ 2nd fluorescence     10180    1.0180E-01    4.0721E-04                                                                
+     total           670252    6.7025E+00    8.9303E+00              total           670252    6.7025E+00    8.9303E+00
+
+   number of photons banked                   369071        average time of (shakes)              cutoffs
+   photon tracks per source particle      6.7025E+00          escape            3.9292E+01          tco   1.0000E+33
+   photon collisions per source particle  1.0030E+01          capture           4.4386E-02          eco   1.0000E-03
+   total photon collisions                   1002993          capture or escape 4.1013E+00          wc1   0.0000E+00
+                                                              any termination   3.8680E+00          wc2   0.0000E+00
+
+ computer time so far in this run     0.06 minutes            maximum number ever in bank        13
+ computer time in mcrun               0.06 minutes            bank overflows to backup file       0
+ source particles per minute            1.7067E+06
+ random numbers generated                 11970820            most random numbers used was      723 in history    59124
+
+ range of sampled source weights = 1.0000E+00 to 1.0000E+00
+1photon   activity in each cell                                                                         print table 126
+
+                 tracks     population   collisions   collisions     number        flux        average      average
+        cell    entering                               * weight     weighted     weighted   track weight   track mfp
+                                                    (per history)    energy       energy     (relative)      (cm)
+
+     1    11      128210       129387       157857    1.5786E+00   4.5840E+00   4.5840E+00   1.0000E+00   1.5111E+01
+     2    21      111412       442828       845136    8.4514E+00   3.3470E+00   3.3470E+00   1.0000E+00   4.8245E+00
+     3    33      177666       124905            0    0.0000E+00   3.7753E+00   3.7753E+00   1.0000E+00   0.0000E+00
+
+     total        417288       697120      1002993    1.0030E+01
+
+1tally   8        nps =   100000
+           tally type 8    pulse height distribution.                   units   number    
+           tally for  photons  
+ 
+ cell  21                                                                                                              
+      energy
+    1.0000E-03   1.76830E-01 0.0068
+    9.9999E-01   1.36970E-01 0.0079
+    1.0000E+00   0.00000E+00 0.0000
+    2.0000E+00   3.65600E-02 0.0162
+    2.0000E+00   0.00000E+00 0.0000
+    3.0000E+00   2.39000E-02 0.0202
+    3.0000E+00   0.00000E+00 0.0000
+    4.0000E+00   2.06900E-02 0.0218
+    4.0000E+00   0.00000E+00 0.0000
+    5.0000E+00   2.34400E-02 0.0204
+    5.0000E+00   0.00000E+00 0.0000
+    6.0000E+00   3.29700E-02 0.0171
+    6.0000E+00   0.00000E+00 0.0000
+    7.0000E+00   5.76600E-02 0.0128
+    7.0000E+00   0.00000E+00 0.0000
+    8.0000E+00   1.80660E-01 0.0067
+    8.0000E+00   2.06860E-01 0.0062
+      total      8.96540E-01 0.0011
+
+
+ ===================================================================================================================================
+
+           results of 10 statistical checks for the estimated answer for the tally fluctuation chart (tfc) bin of tally   8
+
+ tfc bin     --mean--      ---------relative error---------      ----variance of the variance----      --figure of merit--     -pdf-
+ behavior    behavior      value   decrease   decrease rate      value   decrease   decrease rate       value     behavior     slope
+
+ desired      random       <0.10      yes      1/sqrt(nps)       <0.10      yes        1/nps           constant    random      >3.00
+ observed     random        0.00      yes          yes            0.00      yes         yes            constant    random      10.00
+ passed?        yes          yes      yes          yes             yes      yes         yes               yes        yes         yes
+
+ ===================================================================================================================================
+
+
+ this tally meets the statistical criteria used to form confidence intervals: check the tally fluctuation chart to verify.
+ the results in other bins associated with this tally may not meet these statistical criteria.
+
+ ----- estimated confidence intervals:  -----
+
+ estimated asymmetric confidence interval(1,2,3 sigma): 8.9558E-01 to 8.9750E-01; 8.9461E-01 to 8.9847E-01; 8.9365E-01 to 8.9943E-01
+ estimated  symmetric confidence interval(1,2,3 sigma): 8.9558E-01 to 8.9750E-01; 8.9461E-01 to 8.9847E-01; 8.9365E-01 to 8.9943E-01
+
+1analysis of the results in the tally fluctuation chart bin (tfc) for tally   8 with nps =    100000    print table 160
+
+
+ normed average tally per history  = 8.96540E-01          unnormed average tally per history  = 8.96540E-01
+ estimated tally relative error    = 0.0011               estimated variance of the variance  = 0.0001
+ relative error from zero tallies  = 0.0011               relative error from nonzero scores  = 0.0000
+
+ number of nonzero history tallies =       89654          efficiency for the nonzero tallies  = 0.8965
+ history number of largest  tally  =           1          largest  unnormalized history tally = 1.00000E+00
+ (largest  tally)/(average tally)  = 1.11540E+00          (largest  tally)/(avg nonzero tally)= 1.00000E+00
+
+ (confidence interval shift)/mean  = 0.0000               shifted confidence interval center  = 8.96540E-01
+
+
+ if the largest  history score sampled so far were to occur on the next history, the tfc bin quantities would change as follows:
+
+      estimated quantities           value at nps           value at nps+1           value(nps+1)/value(nps)-1.
+
+      mean                            8.96540E-01             8.96541E-01                     0.000001
+      relative error                  1.07424E-03             1.07423E-03                    -0.000011
+      variance of the variance        6.78097E-05             6.78100E-05                     0.000004
+      shifted center                  8.96540E-01             8.96540E-01                     0.000000
+      figure of merit                 1.47892E+07             1.47896E+07                     0.000021
+
+ the 100 largest  history tallies appear to have a  maximum value of about 1.00000E+00
+ the large score tail of the empirical history score probability density function appears to have no unsampled regions.
+
+ fom = (histories/minute)*(f(x) signal-to-noise ratio)**2 = (1.707E+06)*( 2.944E+00)**2 = (1.707E+06)*(8.666E+00) = 1.479E+07
+
+1status of the statistical checks used to form confidence intervals for the mean for each tally bin
+
+
+ tally   result of statistical checks for the tfc bin (the first check not passed is listed) and error magnitude check for all bins
+
+     8   passed the 10 statistical checks for the tally fluctuation chart bin result               
+         passed all bin error check:    18 tally bins had     7 bins with zeros and     0 bins with relative errors exceeding 0.10
+
+
+ the 10 statistical checks are only for the tally fluctuation chart bin and do not apply to other tally bins.
+
+ the tally bins with zeros may or may not be correct: compare the source, cutoffs, multipliers, et cetera with the tally bins.
+
+1tally fluctuation charts                         
+
+                       tally    8
+       nps      mean     error   vov  slope    fom
+      8000   8.9950E-01 0.0037 0.0009 10.0 1.7E+07
+     16000   8.9994E-01 0.0026 0.0004 10.0 1.7E+07
+     24000   8.9658E-01 0.0022 0.0003 10.0 1.5E+07
+     32000   8.9803E-01 0.0019 0.0002 10.0 1.5E+07
+     40000   8.9665E-01 0.0017 0.0002 10.0 1.5E+07
+     48000   8.9631E-01 0.0016 0.0001 10.0 1.5E+07
+     56000   8.9670E-01 0.0014 0.0001 10.0 1.5E+07
+     64000   8.9611E-01 0.0013 0.0001 10.0 1.5E+07
+     72000   8.9599E-01 0.0013 0.0001 10.0 1.4E+07
+     80000   8.9558E-01 0.0012 0.0001 10.0 1.5E+07
+     88000   8.9565E-01 0.0012 0.0001 10.0 1.5E+07
+     96000   8.9625E-01 0.0011 0.0001 10.0 1.5E+07
+    100000   8.9654E-01 0.0011 0.0001 10.0 1.5E+07
+
+ ***********************************************************************************************************************
+ dump no.   11 on file b502.r       nps =    100000     coll =        1002993     ctm =    0.06     nrn =       11970820
+
+
+         2 warning messages so far.
+
+
+ run terminated when    100000 particle histories were done.
+
+ computer time =    0.06 minutes
+
+ mcnp     version 5     05052003                     03/04/21 21:11:30                     probid =  03/04/21 21:11:26 

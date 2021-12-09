@@ -1,13 +1,13 @@
 %% 读取FS和C组成的output file中的注量率分布图
 close all;clear;
 %% 手动输入参数
-outputFileName = 'c140';
-param.TIMEAXIS = [1e-4:1e-4:0.005,1]; % 单位：s   total列填任意数字即可
-param.withTotalCol = 1; % 有没有total列
+outputFileName = '9';
+param.TIMEAXIS = [1]; % 单位：s   total列填任意数字即可
+param.withTotalCol = 0; % 有没有total列
 % param.HRZAXIS = 0:10:100;    
 % param.VERAXIS = -130:10:100; 
-param.HRZAXIS = [0,10,20];    
-param.VERAXIS = [-20,-10,0];  
+param.HRZAXIS = 0:19;    
+param.VERAXIS = 0:19;  
 
 %% 生成参数
 fileName = [outputFileName,'.o'];

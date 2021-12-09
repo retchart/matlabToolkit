@@ -6,13 +6,12 @@ function netArea = getnet(s,pk,method)
 %
 % OUTPUTS：
 %    netArea:峰净计数
-
 switch method
-    case 1
-        LL = pk-55;
-        HH = pk+55;
-        netArea = sum(s(LL:HH,1))-(HH-LL+1)*mean([s(LL),s(HH)]);
-    case 2
+    case 1 % 指定本底位置
+        LL = pk-20;
+        HH = pk+20;
+        netArea = sum(s(LL:HH,1))-(HH-LL+1)*mean([s(LL-5:LL);s(HH:HH+5)]);
+    case 2 % 自适应寻找本底
         % 寻找谷底
         LL = pk-3;
         HH = pk+3;
@@ -29,9 +28,9 @@ switch method
             end
         end
         netArea = sum(s(LL:HH,1))-(HH-LL+1)*mean([s(LL),s(HH)]);
-    case 3
-        roi=[pk-30:pk+30];
-        [netArea,~,~,~,~] = fitPeak(roi,s(roi),0);
+    case 3 % 指定道数高斯拟合
+        roi=[round(pk-0.01*pk):round(pk+0.01*pk)];
+        [~,netArea,~,~,~,~] = fitPeak(roi,s(roi),0);
     otherwise
         
         

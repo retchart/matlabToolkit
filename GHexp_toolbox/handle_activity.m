@@ -26,13 +26,11 @@ close(f);
 
 %% 计算长期谱
 spec = sum(orgnSpec(:,nStart:nStop),2); % 单列计数谱
-tsum = sum(t_realtime(1,nStart:nStop));
+tsum = sum(t_real(1,nStart:nStop));
 
 %% 逐峰分析，假设峰区为正负10道
 chRange = (-10:10)';
 for i = 1:size(pks,1)
     figure;
     [result(i,3),~,~,~,~] = fitPeak(chRangepks(i,1),spec(chRange+pks(i,1)),1);
-    % result(:,1:3) 道址，能量(暂未纳入)，峰面积
-    pause(0.2);
 end

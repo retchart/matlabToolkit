@@ -1,5 +1,5 @@
 clear; close all;
-foldersNameExp = 'P*';
+foldersNameExp = 'g*';
 a=dir(foldersNameExp);
 for i=1:size(a,1)
     if a(i).isdir==1

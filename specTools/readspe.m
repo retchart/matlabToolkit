@@ -22,14 +22,12 @@ s.startTime = [];
 s.livetime = [];
 s.realtime = [];
 s.spec = [];
-
 suffixs = {'.spe','.Spe','.SPE'};
 if contains(fileName,suffixs)
     fid = fopen(fileName,'r');
 else
     fid = fopen([fileName,'.spe'],'r');
 end
-
 
 i = 0;
 while 1 && infoFlag

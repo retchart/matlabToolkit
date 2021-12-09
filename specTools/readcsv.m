@@ -1,6 +1,6 @@
 function s = readcsv(filename,specStartRow)
-% 待写，提取单个.csv中的能谱信息
-% 函数速度考虑，若使用了specStartRow，本代码不验证其是否为合理的行
+% 提取APG7400输出的单个.csv中的能谱信息
+% 若使用了specStartRow，本代码不验证其是否为合理的行
 %
 % INPUTS：
 % filename:文件名
@@ -31,7 +31,7 @@ while 1 && infoFlag
         % 采集起始时刻
         nownow = datevec(now);
         s.startTime = datevec(dataRow(length(str_walltime)+1:end));
-        s.startTime(1,1) = nownow(1); % 将年份的20改为2020
+        %s.startTime(1,1) = nownow(1); % 将两位数年份改为4位数
         infoFlag = infoFlag - 1;
     elseif strncmp(dataRow,str_realtime,length(str_realtime))
         % 活时间和实时间

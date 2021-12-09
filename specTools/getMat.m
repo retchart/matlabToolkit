@@ -17,7 +17,7 @@ s = readspe([folderName,'\',dir1(3).name],specStartRow);
 specStartRow = s.specStartRow;
 
 %% 导入能谱
-% 目前只根据行号导入能谱，以后有需要可以用readspe读全能谱信息
+% 目前只根据行号导入能谱，进一步的需求可以用readspe读全能谱信息
 for i = 1:size(dir1,1)
     d = importdata([folderName,'\',dir1(i).name],'',specStartRow+1);
     if sum(d.data)~=0

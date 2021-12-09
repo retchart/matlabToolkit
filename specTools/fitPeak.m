@@ -28,11 +28,11 @@ f = fittype('(area/(sigma*sqrt(2*pi)))*exp(-(t-xpeak)^2/(2*sigma^2))+intercept+s
     'independent','t','coefficients',{'area','sigma','xpeak','intercept','slope'});
 options = fitoptions('Method','NonlinearLeastSquares');
 originalPeak = x(find(y==max(y))); originalPeak = originalPeak(1,1);
-options.Lower = [1e-5,0.01,originalPeak-2,y(1),min([10*(y(end)-y(1))/(x(end)-x(1)),0])];
-%options.Lower = [1e-5,0.01,originalPeak-5,0,0];
-%options.Upper = [Inf,Inf,originalPeak+5,Inf,+Inf];
-options.Upper = [Inf,50,originalPeak+5,Inf,0];
-options.StartPoint = [sum(y)-length(x)*(y(1)+y(end))/2,0.0001,originalPeak,y(1)-x(1)*(y(end)-y(1))/(x(end)-x(1)),(y(end)-y(1))/(x(end)-x(1))];
+options.Lower = [1e-5,originalPeak*0.001/2.355,originalPeak-2,y(1),min([10*(y(end)-y(1))/(x(end)-x(1)),-Inf])];
+%options.Lower = [1e-5,0.01,originalPeak-5,0,-Inf];
+%options.Upper = [Inf,Inf,originalPeak+5,Inf,0];
+options.Upper = [Inf,originalPeak*0.05/2.355,originalPeak+5,Inf,0];
+options.StartPoint = [sum(y)-length(x)*(y(1)+y(end))/2,originalPeak*0.005/2.355,originalPeak,y(1)-x(1)*(y(end)-y(1))/(x(end)-x(1)),(y(end)-y(1))/(x(end)-x(1))];
 cfun = fit(x,y,f,options);
 
 area = cfun.area;
