@@ -14,6 +14,7 @@ function [intint,xss,spee] = specialdotnew2(spe,xs,plotOrNot)
 % intint(4): 4.9eV+-0.1eV的中子和注量率积分
 % spee 调试用，射线能谱,第一列能量，第二列通量,第三列该bin内的平均截面
 % xss  调试用，(n,g)截面，第一列能量，第二列截面，第三列注量率密度
+warning('specialdotnew2.m have been updated to numdot.m');
 intint = zeros(1,4);
 xss = [];spee=[];
 if max(spe(:,1))<min(xs(:,1)) ||min(spe(:,1))>max(xs(:,1))

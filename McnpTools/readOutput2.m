@@ -1,5 +1,5 @@
 function [spec,summary] = readOutput2(fileName)
-% 相比readOutput，本函数支持多个能谱的读取
+% 相比readOutput，新增支持单文件内多个能谱的读取
 spec = [];
 summary = [];
 flag = 0 ; % 是否读到能谱

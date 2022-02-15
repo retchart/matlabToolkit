@@ -19,7 +19,7 @@ while ~feof(fid0)
     for varNo = 1:varCount
         lineData = strrep(lineData,['[var',num2str(varNo),']'],num2str(variableList(1,varNo)));
     end
-    if(length(lineData)>82)
+    if(length(lineData)>80)
         flag = 101;
         lineData = strcat('ERROR:',lineData);
     end
@@ -27,9 +27,8 @@ while ~feof(fid0)
 end
 fclose(fid);
 fclose(fid0);
-disp(['generated ',mcnpInputFile]);
 if flag==1
-    disp(['Success: Generate ',mcnpInputFile,' from: ',templateFile]);
+    % disp(['Success: Generated ',mcnpInputFile,' from: ',templateFile]);
 elseif flag==101
     disp('Error: Some row exceeded 80 chars');
 else

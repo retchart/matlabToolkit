@@ -1,11 +1,11 @@
 %% 从orgnList文件获得2维能谱和符合曲线
 close all;
-roiNo = 1; % 仅保存名称使用
+roiNo = 99; % 仅保存名称使用
 coin_time = 1000; % unit: ns
-dataName = '250mgAub';% Name of the list mode file
+dataName = 'nacl';% Name of the list mode file
 load([dataName,'.mat']);
-chx = 2;
-chy = 3;
+chx = 3;
+chy = 4;
 maxChx = 8192; % 纵轴道数
 maxChy = 8192; % 横轴道数
 winChx = [200:maxChx];

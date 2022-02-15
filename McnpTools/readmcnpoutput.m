@@ -1,13 +1,14 @@
 %% 读取FS和C组成的output file中的注量率分布图
+% 读取完成后可使用plotfluxmap形成图片
 close all;clear;
 %% 手动输入参数
-outputFileName = '9';
+outputFileName = '1';
 param.TIMEAXIS = [1]; % 单位：s   total列填任意数字即可
 param.withTotalCol = 0; % 有没有total列
 % param.HRZAXIS = 0:10:100;    
 % param.VERAXIS = -130:10:100; 
-param.HRZAXIS = 0:19;    
-param.VERAXIS = 0:19;  
+param.HRZAXIS = 0:15;    
+param.VERAXIS = -19:8;  
 
 %% 生成参数
 fileName = [outputFileName,'.o'];

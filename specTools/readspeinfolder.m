@@ -1,7 +1,7 @@
 function [orgnSpec,t,t_real,t_live] = readspeinfolder(foldername)
 % 读取ortec循环存储的多个spe能谱并作图、保存
 % 
-dir1 = dir([foldername,'\*.spe']);
+dir1 = dir([foldername,'\2*.spe']);
 t_start = cell(1,length(dir1)); % 时间字符串
 t = zeros(1,length(dir1));
 t_real = zeros(1,length(dir1));
